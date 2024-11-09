@@ -19,7 +19,7 @@ VendorPing is a real-time, location-based notification system that bridges the g
   
 Clone the repository: 
 
-`git clone https://github.com/yourusername/VendorAlert.git`
+`git clone https://github.com/gmahak1206/VendorPing.git`
 
 
 # Usage
