@@ -30,9 +30,10 @@
             } else if(event.data.type === 'SAVE_INTERVAL_ID') {
               localStorage.setItem('intervalId', event.data.value);
             } else if(event.data.type === 'PING_LOCATION') {
-              navigator.geolocation.getCurrentPosition(
+              navigator.geolocation.watchPosition(
                 async (position) => {
-                  await fetch("http://localhost:3001/api/vendors/ping", {
+                  console.log("Hello")
+                  await fetch("./api/vendors/ping", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json"
@@ -48,6 +49,11 @@
                 },
                 error => {
                   throw new Error(error.message)
+                },
+                {
+                  enableHighAccuracy: true,
+                  maximumAge: 10000,
+                  timeout: 5000,
                 }
               );
             }

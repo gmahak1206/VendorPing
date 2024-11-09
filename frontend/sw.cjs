@@ -33,25 +33,13 @@ self.addEventListener('message', async (event) => {
   if (event.data && event.data.type === 'REGISTER_PUSH_SUBSCRIPTION') {
     self.registerPushSubscription();
   } else if(event.data.type === 'START_PING') {
-    try {
-      let intervalId;
-        intervalId = setInterval(() => {
-          self.clients.matchAll().then(clients => {
-            clients.forEach(client => client.postMessage({ type: 'PING_LOCATION' }));
-          });
-        }, 10000);
-      self.clients.matchAll().then(clients => {
-        clients.forEach(client => client.postMessage({ type: 'SAVE_INTERVAL_ID', value: intervalId }));
-      });
-    } catch(error) {
-        console.error("Failed to start ping:", error);
-    }
+    self.clients.matchAll().then(clients => {
+      clients.forEach(client => client.postMessage({ type: 'PING_LOCATION' }));
+    });
   } else if(event.data.type === 'STOP_PING') {
     self.clients.matchAll().then(clients => {
-      clients.forEach(client => client.postMessage({ type: 'GET_INTERVAL_ID' }));
+      clients.forEach(client => client.postMessage({ type: 'CLEAR_WATCH' }));
     });
-  } else if(event.data.type === 'INTERVAL_ID') {
-    clearTimeout(event.data.value);
   }
 })
   
