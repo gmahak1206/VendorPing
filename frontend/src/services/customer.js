@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let base = 'http://localhost:3001';
+let base = '.';
 
 export const siginup = async (body) => {
     await axios.post(`${base}/api/customer/signup`, body, { withCredentials: true });

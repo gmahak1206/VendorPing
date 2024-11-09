@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let base = 'http://localhost:3001';
+let base = '.';
 
 export const getCheckJWT = async () => {
     try {
