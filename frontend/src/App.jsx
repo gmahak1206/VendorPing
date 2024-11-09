@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './app.css'
 import Flow from './pages/Flow';
 import Customer from './pages/Customer';
 import Vendor from './pages/Vendor';
