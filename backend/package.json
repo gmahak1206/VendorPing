@@ -1,0 +1,26 @@
+{
+  "name": "smartthela_backend",
+  "version": "1.0.0",
+  "description": "This pkg contains backend server code for smartThela application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "ENVIROMENT=development nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kushagra Agarwal and Mahak Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cross-env": "^7.0.3",
+    "express": "^4.21.1",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.7"
+  }
+}

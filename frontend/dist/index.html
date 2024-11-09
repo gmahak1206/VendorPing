@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="./app.webmanifest">
+    <title>Vite + React</title>
+    <script type="module" crossorigin src="/assets/index-BohwwUJP.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Cvn9vht8.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch((error) => {
+            console.log('Service Worker registration failed:', error);
+          });
+
+          navigator.serviceWorker.addEventListener('message', (event) => {
+            if (event.data.type === 'GET_INTERVAL_ID') {
+              const value = localStorage.getItem('intervalId');
+              localStorage.removeItem('intervalId');
+              event.source.postMessage({ type: 'INTERVAL_ID', value: value });
+            } else if(event.data.type === 'SAVE_INTERVAL_ID') {
+              localStorage.setItem('intervalId', event.data.value);
+            } else if(event.data.type === 'PING_LOCATION') {
+              navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                  await fetch("http://localhost:3001/api/vendors/ping", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                      coords: {
+                        lat: position.coords.latitude,
+                        long: position.coords.longitude,
+                      }
+                    })
+                  });
+                },
+                error => {
+                  throw new Error(error.message)
+                }
+              );
+            }
+          });
+      });
+    }
+    </script>
+  </body>
+</html>
